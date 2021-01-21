@@ -1,10 +1,10 @@
 const mongoose = require('mongoose')
 
 const tennisMatchSchema = new mongoose.Schema({
-    p1Score: Number,
-    p2Score: Number,
-    p1Name: String,
-    p2Name: String
+    playerOneScore: Number,
+    playerTwoScore: Number,
+    playerOneName: String,
+    playerTwoName: String
 })
 
 const MatchInfo = mongoose.model('MatchInfo', tennisMatchSchema)

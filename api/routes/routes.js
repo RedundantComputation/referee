@@ -1,21 +1,21 @@
-const express = require('express');
-const router = express.Router();
-const MatchInfo = require('./assets')
+var express = require('express');
+var router = express.Router();
+var MatchInfo = require('../assets')
 
 router.post('/', (req, res) => {
     console.log("Saving match info", req.body)
 
-    let { p1Name, p2Name, p1Score, p2Score } = req.body
+    let { playerOneName, playerTwoName, playerOneScore, playerTwoScore } = req.body
 
     let newMatch = new MatchInfo({
-        p1Name,
-        p2Name,
-        p1Score,
-        p2Score
+        playerOneName,
+        playerTwoScore,
+        playerOneScore,
+        playerTwoScore
     })
 
     // All fields are filled, else 400 (bad request)
-    if (!p1Name || !p2Name || !p1Score || !p2Score) {
+    if (!playerOneName || !playerTwoScore || !playerOneScore || !playerTwoScore) {
         return res.status(400).send({
             success: false,
             message: "Invalid request - Missing fields"
@@ -55,3 +55,5 @@ router.get('/', (req, res) => {
         })
     })
 })
+
+module.exports = router;
