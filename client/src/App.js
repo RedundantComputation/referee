@@ -39,6 +39,7 @@ class App extends Component {
         let player1Name = this.state.playerNames.player1
         let player2Name = this.state.playerNames.player2
 
+        // Two-point advantage win (no deuce)
         if (Math.abs(player1 - player2) >= 2 && (player1 >= 4 || player2 >= 4)) {
             let winner = player1 > player2 ? player1Name : player2Name
             let data = {
@@ -61,13 +62,16 @@ class App extends Component {
             let json = await response.json()
             console.log("JSON DATA ", response, json)
             return
+        // Deuce and advantage section
         } else {
             let leadingScore = player1 > player2 ? player1 : player2
-            let showFlash = ((player1 - player2 === 0 || Math.abs(player1 - player2) >= 3) && leadingScore >= 3)
+            let deuceCondition = player1 - player2 === 0 && leadingScore > 3
+            let advantageCondition1 = (player1 > 3 && player2 > 3 && Math.abs(player1 - player2) === 1)
+            let showFlash = deuceCondition || advantageCondition1
             let advantagePlayer = player1 > player2 ? player1Name : player2Name
             let flashMessage = player1 - player2 === 0 ? "Deuce" : `Advantage ${advantagePlayer}!`
 
-            console.log("Show flash", showFlash, player1, player2)
+            console.log("Show flash", deuceCondition, advantageCondition1, showFlash, player1, player2)
 
             this.setState({
                 count: count,
@@ -101,6 +105,7 @@ class App extends Component {
                 </header>
                 {
                     this.state.gameOn ? (
+                        <div>
                         <table className="center">
                             <tbody>
                                 <tr>
@@ -148,6 +153,8 @@ class App extends Component {
                                 }
                             </td>
                         </table>
+                        <Button onClick={this.replay}>Replay</Button>
+                        </div>
                     ) : (
                             <div>
                                 <Alert variant="success">
@@ -160,7 +167,7 @@ class App extends Component {
                         )
                 }
                 {
-                    this.state.showFlash && <FlashMessage duration={5000} persistOnHover={true}>
+                    this.state.showFlash && <FlashMessage duration={10000} persistOnHover={true}>
                         <p className="flash-message">{this.state.flashMessage}</p>
                     </FlashMessage>
                 }

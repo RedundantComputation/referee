@@ -6,10 +6,7 @@ export default class CustomButtonGroup extends Component {
         const {increment, player} = this.props
         return (
             <ButtonGroup className="mr-2" aria-label="First group">
-                            <Button className='inc' onClick={() => increment('love', player)}>Love</Button>
-                            <Button className='inc' onClick={() => increment('fifteen', player)}>Fifteen</Button>
-                            <Button className='inc' onClick={() => increment('thirty', player)}>Thirty</Button>
-                            <Button className='inc' onClick={() => increment('fourty', player)}>Fourty</Button>
+                            <Button className='inc' onClick={() => increment('fifteen', player)}>{player} scored</Button>
             </ButtonGroup>
         )
     }

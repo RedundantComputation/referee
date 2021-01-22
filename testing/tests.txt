@@ -1,0 +1,14 @@
+# Test players can add names
+	* Game does not begin logging unless both players have added names
+
+# Test game logic
+	* Appropriate player wins if points >= 4 and advantage >= 2
+		* Player 1 win
+		* Player 2 win
+	* Deuce when player point difference == 0 and points >= 4
+		* No deuce message when points < 4
+	* Advantage for appropriate player when points >= 4 and point difference == 1
+		* Player 1 advantage
+		* Player 2 advantage
+
+# Test reset button
